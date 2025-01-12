@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>爱你 君君</title>
+  <style>
+    #container {
+        font-family: "等线 Light";
+        white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+
+<script type="module">
+  let name = prompt("你的名字是?");
+  alert(name + ", 你好!");
+  alert("很高兴认识你!");
+
+  const container = document.getElementById("container");
+
+  const lines = ["开玩笑的, 我肯定知道你的名字啦!",
+  "但是, 君君, 我好想你呀 ww",
+  "所以试着做了一个简陋的小网站, 为你做的, 嘿嘿",
+  "学了这么久的前端, 终于能拿出来用一手了."];
+
+  startPrinting(lines,() =>{
+    let line_2 = [];
+    fetch('src/诗句.txt')
+      .then(response => response.text())
+      .then(data =>{
+        line_2 = data.split('\n');
+        startPrinting(line_2);
+      }).catch(error => console.error('加载文件失败:', error));
+  });
+
+
+  function startPrinting(article,callback){
+    let lineIndex = 0;
+    let charIndex = 0;
+    let timer;
+    let delay;
+
+    function printLine(){
+      if(lineIndex >= article.length){
+        clearInterval(timer);
+        if (callback) callback();
+        return;
+      }
+
+      const currentLine = article[lineIndex];
+
+      if(charIndex < currentLine.length){
+        container.innerHTML += currentLine[charIndex];
+        charIndex++;
+      } else {
+        container.innerHTML += "\n";
+        charIndex = 0;
+        lineIndex++;
+      }
+
+      //动态调整延迟
+      delay = (charIndex == 0 && lineIndex > 0) ? 500 : 50;
+
+      clearInterval(timer);
+      timer = setInterval(printLine,delay);
+
+    }
+
+    timer = setInterval(printLine,delay);
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
