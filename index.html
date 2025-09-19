@@ -8,26 +8,10 @@
         font-family: "等线 Light";
         white-space: pre-wrap;
     }
-    #Image_1 {
-        width: 1000px;
-        height: 1000px;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-
-    #Image1 {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
   </style>
 </head>
 <body>
   <div id="container"></div>
-  <div id="Image_1">
-    <img src="src/Image_1.jpg" alt="不可能! 绝对能显示出来图片的!" id="Image1">
-  </div>
 
 <script type="module">
   let name = prompt("你的名字是?");
@@ -36,7 +20,7 @@
 
   const container = document.getElementById("container");
 
-  const lines = ["这是聂鲁达的一首诗."];
+  const lines = ["这是聂鲁达的一首诗."],["This is one poem by Pablo Neruda."]
 
   startPrinting(lines,() =>{
     let line_2 = [];
